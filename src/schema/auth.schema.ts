@@ -24,3 +24,9 @@ export const verifyEmailSchema = z.object({
     userId: z.string().min(1, { message: "User id is required" }),
   }),
 });
+
+export const verificationMailSchema = z.object({
+  body: z.object({
+    email: z.email({ message: "Invalid email address" }),
+  }),
+});

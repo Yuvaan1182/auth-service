@@ -1,5 +1,4 @@
 import { registerController } from "#controllers/register.controller.js";
-import { createRateLimit } from "#middlewares/app_middleware/rate_limiter.middleware.js";
 import { validate } from "#middlewares/zod_middleware/validate.zod.middleware.js";
 import { registerSchema, verifyEmailSchema } from "#schema/auth.schema.js";
 import { createRegisterService } from "#services/auth/register.factory.js";
@@ -21,9 +20,14 @@ export const registerRoutes = () => {
     controller.verifyEmail,
   );
 
-  const setRateLimit = createRateLimit(2);
+  /** @TODO: set limit to resend verification email in time window per user */
+
   /** --- resent verification mail --- */
-  router.post("/resend-verification", controller.resendVerification);
+  router.post(
+    "/resend-verification",
+    validate(verifyEmailSchema),
+    controller.resendVerification,
+  );
 
   return router;
 };
