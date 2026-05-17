@@ -69,7 +69,7 @@ jest-results/
 
 # Optional: lockfiles if your team does not commit them
 
-# package-lock.json
+package-lock.json
 
 # yarn.lock
 
