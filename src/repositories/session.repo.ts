@@ -8,6 +8,41 @@ export class SessionRepo {
     const session = await this.db.session.create({ data });
     return session;
   }
+
+  async findSession(data: { sessionId: string }) {
+    const session = await this.db.session.findUnique({
+      where: {
+        sessionId: data.sessionId,
+      },
+    });
+
+    return session;
+  }
+
+  async rotateSession(data: { sessionId: string; tokenHash: string }) {
+    const session = await this.db.session.update({
+      where: {
+        sessionId: data.sessionId,
+      },
+      data: {
+        refreshTokenHash: data.tokenHash,
+        lastUsedAt: new Date(),
+      },
+    });
+  }
+
+  async revokeSession(data: { sessionId: string }) {
+    const session = await this.db.session.update({
+      where: {
+        sessionId: data.sessionId,
+      },
+      data: {
+        revoked: true,
+      },
+    });
+
+    return session;
+  }
 }
 // model Session {
 //   id String @id @default(uuid())

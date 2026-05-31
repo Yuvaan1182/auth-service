@@ -36,6 +36,9 @@ export const responseCodes = {
   /** ----- Login Service Error Codes ----- */
   AUTH_FAILURE_014:
     "User not exist in DB. Please try again with correct credentials.",
+  AUTH_FAILURE_015: "Refresh token not Found. Please provide refresh token.",
+  AUTH_FAILURE_016: "User session Expired. Revoked user current session.",
+  AUTH_FAILURE_017: "Refresh token missuse detected.",
 } as const;
 
 export type responseCode = keyof typeof responseCodes;

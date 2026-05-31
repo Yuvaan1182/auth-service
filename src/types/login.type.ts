@@ -22,3 +22,9 @@ export type CreateSession = {
 
   expiresAt: Date;
 };
+
+export type RefreshToken = {
+  sub: string;
+  type: string;
+  sid: string;
+};
