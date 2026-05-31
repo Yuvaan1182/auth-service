@@ -22,12 +22,14 @@ model User {
   verified              Boolean  @default(false)
   isActive              Boolean  @default(true)
 
+  mfa                   Boolean  @default(false)
+
   createdAt             DateTime @default(now())
   updatedAt             DateTime @updatedAt
 
   oauthAccounts         OAuthAccount[]
   roles                 UserRole[]
-  events                AuthEvent[]
+  sessions              Session[]
   verificationTokens    Token[]
 }
 
@@ -63,17 +65,82 @@ model UserRole {
   @@id([userId, roleId])
 }
 
-model AuthEvent {
-  id        String   @id @default(uuid())
+// ======================================================
+// SESSION
+// ======================================================
 
-  userId    String?
-  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+model Session {
+  id String @id @default(uuid())
+  sessionId String @unique
 
-  eventType String
+  // ------------------------------------------
+  // RELATION
+  // ------------------------------------------
+
+  userId String
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // ------------------------------------------
+  // REFRESH TOKEN
+  // ------------------------------------------
+  //
+  // Store HASHED refresh token only
+  // Never store raw token
+  //
+  refreshTokenHash String
+
+  // ------------------------------------------
+  // DEVICE INFO
+  // ------------------------------------------
+
   ipAddress String?
-  userAgent String?
+
+  userAgent String? @db.Text
+
+  browser   String?
+  os        String?
+  device    String?
+
+  // Example:
+  // "Chrome"
+  // "Windows"
+  // "iPhone"
+
+  // ------------------------------------------
+  // SESSION STATE
+  // ------------------------------------------
+
+  revoked Boolean @default(false)
+
+  // optional reason
+  revokedReason String?
+
+  // ------------------------------------------
+  // EXPIRATION
+  // ------------------------------------------
+
+  expiresAt DateTime
+
+  // ------------------------------------------
+  // AUDIT
+  // ------------------------------------------
+
+  lastUsedAt DateTime @default(now())
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // ==================================================
+  // INDEXES
+  // ==================================================
+
+  @@index([userId])
+
+  @@index([expiresAt])
+
+  @@index([revoked])
+
+  @@map("sessions")
 }
 
 model Token {

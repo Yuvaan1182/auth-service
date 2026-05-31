@@ -32,6 +32,10 @@ export const responseCodes = {
     "Resent Verification failed: Incorrect Email. User does not exists",
   AUTH_FAILURE_013:
     "Resent Verification failed: Mail service is not working. Please try after some time.",
+
+  /** ----- Login Service Error Codes ----- */
+  AUTH_FAILURE_014:
+    "User not exist in DB. Please try again with correct credentials.",
 } as const;
 
 export type responseCode = keyof typeof responseCodes;

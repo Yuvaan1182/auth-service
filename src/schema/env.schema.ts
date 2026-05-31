@@ -8,6 +8,7 @@ export const env_schema = z.object({
   /** -- JWT --- */
   JWT_ACCESS_SECRET: z.string(),
   JWT_REFRESH_SECRET: z.string(),
+  JWT_MFA_SECRET: z.string(),
 
   /** --- DB --- */
   POSTGRES_PORT: z.string().optional(),

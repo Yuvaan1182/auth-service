@@ -18,7 +18,8 @@ export const env = {
 
   /** --- JWT --- */
   jwt_access_secret: parsed.JWT_ACCESS_SECRET,
-  jwt_refrest_secret: parsed.JWT_REFRESH_SECRET,
+  jwt_refresh_secret: parsed.JWT_REFRESH_SECRET,
+  jwt_mfa_secret: parsed.JWT_MFA_SECRET,
 
   /** --- DB --- */
   db_port: Number(parsed.POSTGRES_PORT) || 5432,
