@@ -38,7 +38,9 @@ export const registerController = (registerService: RegisterService) => ({
       );
     }
 
-    return sendResponse(true, res, 200, "AUTH_SUCCESS_002");
+    return sendResponse(true, res, 200, "AUTH_SUCCESS_002", {
+      message: "User email verified successfully.",
+    });
   }),
 
   resendVerification: asyncHandler(async (req: Request, res: Response) => {
@@ -53,5 +55,9 @@ export const registerController = (registerService: RegisterService) => ({
         "AUTH_FAILURE_013",
       );
     }
+
+    return sendResponse(true, res, 200, "AUTH_SUCCESS_003", {
+      message: "User resend verification emailed successfully.",
+    });
   }),
 });
