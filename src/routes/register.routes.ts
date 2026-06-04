@@ -7,8 +7,8 @@ import { Router } from "express";
 export const registerRoutes = () => {
   const router = Router();
 
-  const registerService = createRegisterService();
-  const controller = registerController(registerService);
+  const service = createRegisterService();
+  const controller = registerController(service);
 
   /** --- register user --- */
   router.post("/", validate(registerSchema), controller.register);
