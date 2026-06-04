@@ -6,6 +6,8 @@ import { PostgreDB } from "../db/postgre.db.js";
 import { EmailService } from "#services/email/email.service.js";
 import { RegisterRepos } from "./register.type.js";
 import { LoginRepos } from "./login.type.js";
+import { TokenRepos } from "./token.type.js";
+import { TokenService } from "#services/auth/token.service.js";
 
 export type VerifyEmailInput = z.infer<typeof verifyEmailSchema>;
 
@@ -25,9 +27,21 @@ export type AuthServiceDeps = {
   registerService: RegisterService;
 };
 
-export type LoginDeps = {
+export type LoginServiceDeps = {
   db: PostgreDB;
   redisService: RedisServiceInterface;
   emailService: EmailService;
+  tokenService: TokenService;
   repos?: Partial<LoginRepos>;
+};
+
+export type TokenServiceDeps = {
+  db: PostgreDB;
+  repos?: Partial<TokenRepos>;
+};
+
+export type RefreshServiceDeps = {
+  db: PostgreDB;
+  tokenService: TokenService;
+  repos?: Partial<TokenRepos>;
 };

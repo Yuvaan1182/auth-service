@@ -46,9 +46,9 @@ export const registerController = (registerService: RegisterService) => ({
   resendVerification: asyncHandler(async (req: Request, res: Response) => {
     const { email } = req.body;
 
-    const isResendMailSent = await registerService.resendVerification(email);
+    const isMailSent = await registerService.resendVerification(email);
 
-    if (!isResendMailSent) {
+    if (!isMailSent) {
       throw new AppError(
         "Verification mail cannot be sent. Please try after some time",
         400,
@@ -57,7 +57,7 @@ export const registerController = (registerService: RegisterService) => ({
     }
 
     return sendResponse(true, res, 200, "AUTH_SUCCESS_003", {
-      message: "User resend verification emailed successfully.",
+      message: "User resend verification email sent successfully.",
     });
   }),
 });
