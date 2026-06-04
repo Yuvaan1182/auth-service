@@ -8,6 +8,7 @@ import { RegisterRepos } from "./register.type.js";
 import { LoginRepos } from "./login.type.js";
 import { TokenRepos } from "./token.type.js";
 import { TokenService } from "#services/auth/token.service.js";
+import { LogoutRepos } from "./logout.type.js";
 
 export type VerifyEmailInput = z.infer<typeof verifyEmailSchema>;
 
@@ -36,7 +37,6 @@ export type LoginServiceDeps = {
 };
 
 export type TokenServiceDeps = {
-  db: PostgreDB;
   repos?: Partial<TokenRepos>;
 };
 
@@ -44,4 +44,9 @@ export type RefreshServiceDeps = {
   db: PostgreDB;
   tokenService: TokenService;
   repos?: Partial<TokenRepos>;
+};
+
+export type LogoutServiceDeps = {
+  db: PostgreDB;
+  repos?: Partial<LogoutRepos>;
 };

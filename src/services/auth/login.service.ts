@@ -4,10 +4,10 @@ import { AppError } from "#utils/app_error.util.js";
 import { hashString, verifyString } from "#utils/password.util.js";
 import { env } from "#config/env.config.js";
 
-// POST   /auth/login
-// POST   /auth/logout
-// POST   /auth/refresh
 // POST   /auth/introspect   (optional, for token validation across services)
+/**
+ * @TODO: session device based user login handling
+ */
 export class LoginService {
   constructor(private deps: LoginServiceDeps) {}
 

@@ -41,6 +41,11 @@ export const responseCodes = {
   AUTH_FAILURE_015: "Refresh token not Found. Please provide refresh token.",
   AUTH_FAILURE_016: "User session Expired. Revoked user current session.",
   AUTH_FAILURE_017: "Refresh token missuse detected.",
+
+  /** ----- Logout Service Error Codes ----- */
+  AUTH_FAILURE_018: "Missing Refresh token.",
+  AUTH_FAILURE_019: "Invalid Logout request. User session does not exist.",
+  AUTH_FAILURE_020: "Internal Server error while revoking session.",
 } as const;
 
 export type responseCode = keyof typeof responseCodes;
