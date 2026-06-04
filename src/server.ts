@@ -2,7 +2,7 @@ import { createApp } from "./app.js";
 import { env } from "#config/env.config.js";
 import { ServerOptions } from "#types/server.type.js";
 import { RedisService } from "#redis/redis.service.js";
-import { PostgreDB } from "./db/postgre.db.js";
+import { PostgreDB } from "#db/postgre.db.js";
 
 export const startServer = async (
   options: ServerOptions = {},

@@ -1,7 +1,7 @@
 import { LoginServiceDeps } from "#types/auth.type.js";
-import { PostgreDB } from "../../db/postgre.db.js";
-import { LoginService } from "./login.service.js";
-import { TokenService } from "./token.service.js";
+import { PostgreDB } from "#db/postgre.db.js";
+import { LoginService } from "#services/auth/login.service.js";
+import { TokenService } from "#services/auth/token.service.js";
 
 export const createLoginService = (deps?: LoginServiceDeps) => {
   const db = deps?.db ?? new PostgreDB();

@@ -1,8 +1,8 @@
 import { RedisService } from "#redis/redis.service.js";
 import { EmailService } from "#services/email/email.service.js";
 import { RegisterDeps } from "#types/auth.type.js";
-import { PostgreDB } from "../../db/postgre.db.js";
-import { RegisterService } from "./register.service.js";
+import { PostgreDB } from "#db/postgre.db.js";
+import { RegisterService } from "#services/auth/register.service.js";
 
 export const createRegisterService = (deps?: Partial<RegisterDeps>) => {
   const db = deps?.db ?? new PostgreDB();

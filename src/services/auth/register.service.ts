@@ -11,15 +11,6 @@ import { generateToken, hashToken } from "#utils/token_generator.util.js";
 export class RegisterService {
   constructor(private deps: RegisterDeps) {}
 
-  private buildVerificationTokenPayload(userId: string, tokenHash: string) {
-    return {
-      tokenHash,
-      purpose: TokenPurpose.EMAIL_VERIFICATION,
-      userId,
-      expiresAt: new Date(Date.now() + EMAIL_TOKEN_EXPIRY_SECONDS * 1000),
-    };
-  }
-
   private async cacheKey(key: string, val: string, ttl: number): Promise<void> {
     try {
       await this.deps.redisService.setKeyWithTTL(key, val, ttl);

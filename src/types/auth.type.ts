@@ -1,14 +1,14 @@
 import z from "zod";
-import { verifyEmailSchema } from "../schema/register.schema.js";
 import { RedisServiceInterface } from "#interface/redis.service.interface.js";
 import { RegisterService } from "#services/auth/register.service.js";
-import { PostgreDB } from "../db/postgre.db.js";
+import { PostgreDB } from "#db/postgre.db.js";
 import { EmailService } from "#services/email/email.service.js";
 import { RegisterRepos } from "./register.type.js";
 import { LoginRepos } from "./login.type.js";
 import { TokenRepos } from "./token.type.js";
 import { TokenService } from "#services/auth/token.service.js";
 import { LogoutRepos } from "./logout.type.js";
+import { verifyEmailSchema } from "#schema/email.schema.js";
 
 export type VerifyEmailInput = z.infer<typeof verifyEmailSchema>;
 

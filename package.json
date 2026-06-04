@@ -17,7 +17,9 @@
     "#redis/*": "./src/services/redis/*",
     "#schema/*": "./src/schema/*",
     "#services/*": "./src/services/*",
-    "#interface/*": "./src/interface/*"
+    "#interface/*": "./src/interface/*",
+    "#db/*": "./src/db/*",
+    "#factory/*": "./src/factory/*"
   },
   "main": "index.js",
   "scripts": {
