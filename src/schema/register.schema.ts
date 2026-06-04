@@ -15,18 +15,3 @@ export const registerSchema = z.object({
       .max(100, { message: "Name cannot exceed 100 characters." }),
   }),
 });
-
-export const verifyEmailSchema = z.object({
-  query: z.object({
-    token: z.string().min(1, { message: "Token is required." }),
-  }),
-  body: z.object({
-    userId: z.string().min(1, { message: "User id is required" }),
-  }),
-});
-
-export const verificationMailSchema = z.object({
-  body: z.object({
-    email: z.email({ message: "Invalid email address" }),
-  }),
-});

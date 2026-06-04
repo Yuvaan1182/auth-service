@@ -1,5 +1,5 @@
 import z from "zod";
-import { verifyEmailSchema } from "../schema/auth.schema.js";
+import { verifyEmailSchema } from "../schema/register.schema.js";
 import { RedisServiceInterface } from "#interface/redis.service.interface.js";
 import { RegisterService } from "#services/auth/register.service.js";
 import { PostgreDB } from "../db/postgre.db.js";

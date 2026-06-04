@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { registerSchema } from "#schema/auth.schema.js";
+import { registerSchema } from "#schema/register.schema.js";
 
 describe("Registration Schema Validation", () => {
   it("should pass with valid data", () => {
