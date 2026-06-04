@@ -4,7 +4,6 @@ import { UserRepo } from "#repo/user.repo.js";
 
 export type LoginRepos = {
   userRepo?: UserRepo;
-  tokenRepo?: TokenRepo;
   sessionRepo?: SessionRepo;
 };
 

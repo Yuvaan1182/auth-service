@@ -37,7 +37,7 @@ export class LoginService {
       const tempToken = this.deps.tokenService.generateMFAToken(user.id);
       return {
         mfaEnabled: true,
-        token: tempToken,
+        mfaToken: tempToken,
       };
     }
 

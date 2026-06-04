@@ -42,6 +42,9 @@ export const responseCodes = {
   AUTH_FAILURE_016: "User session Expired. Revoked user current session.",
   AUTH_FAILURE_017: "Refresh token missuse detected.",
 
+  /** ----- Login Service Success Codes ----- */
+  AUTH_SUCCESS_004: "User Login Success: tokens fetch successfully",
+
   /** ----- Logout Service Error Codes ----- */
   AUTH_FAILURE_018: "Missing Refresh token.",
   AUTH_FAILURE_019: "Invalid Logout request. User session does not exist.",

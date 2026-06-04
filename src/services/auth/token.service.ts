@@ -1,4 +1,5 @@
 import { env } from "#config/env.config.js";
+import { SessionRepo } from "#repo/session.repo.js";
 import { TokenServiceDeps } from "#types/auth.type.js";
 import { hashString } from "#utils/password.util.js";
 import jwt from "jsonwebtoken";
@@ -62,8 +63,11 @@ export class TokenService {
     /** -------- create 7 day expiry -------- */
     const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7);
 
+    const client = await this.deps.db.getClient();
+    const sessionRepo = this.deps.repos?.sessionRepo ?? new SessionRepo(client);
+
     /** -------- save session -------- */
-    const session = await this.deps.repos?.sessionRepo?.createSession({
+    const session = await sessionRepo.createSession({
       sessionId,
       userId,
       refreshTokenHash,

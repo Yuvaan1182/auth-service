@@ -30,13 +30,12 @@ export type AuthServiceDeps = {
 
 export type LoginServiceDeps = {
   db: PostgreDB;
-  redisService: RedisServiceInterface;
-  emailService: EmailService;
   tokenService: TokenService;
   repos?: Partial<LoginRepos>;
 };
 
 export type TokenServiceDeps = {
+  db: PostgreDB;
   repos?: Partial<TokenRepos>;
 };
 
