@@ -12,6 +12,13 @@ export const createApp = () => {
   app.use(express.json());
   app.use(addTraceId);
 
+  app.use((req, res, next) => {
+    console.log("REQUEST:", req.method, req.originalUrl);
+    next();
+  });
+  /** -------- debug route to check server started -------- */
+  app.get("/", (req, res) => res.send("<h1>Hello world</h1>"));
+
   app.use("/api/v1", routes);
 
   app.use(errorHandler);

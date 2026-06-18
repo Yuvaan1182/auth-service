@@ -1,15 +1,17 @@
 import { PrismaClient } from "../generated/prisma/index.js";
-import { Pool } from "pg";
+// import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { env } from "./env.config.js";
 import { DBConnection } from "#types/prisma.type.js";
 
 export const createPrismaClient = () => {
-  const pool = new Pool({
-    connectionString: env.db_url,
-  });
+  console.log("Creating Prisma Client");
 
-  const adapter = new PrismaPg(pool);
+  // const pool = new Pool({
+  //   connectionString: env.db_url,
+  // });
+
+  const adapter = new PrismaPg({ connectionString: env.db_url });
 
   return new PrismaClient({
     adapter,

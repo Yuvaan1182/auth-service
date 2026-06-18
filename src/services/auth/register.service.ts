@@ -1,7 +1,3 @@
-import { EMAIL_TOKEN_EXPIRY_SECONDS } from "#constants/app.constants.js";
-import { TokenPurpose } from "#prisma/index.js";
-import { TokenRepo } from "#repo/token.repo.js";
-import { UserRepo } from "#repo/user.repo.js";
 import { RegisterDeps } from "#types/auth.type.js";
 import { AppError } from "#utils/app_error.util.js";
 import { hashString, isStrongPassword } from "#utils/password.util.js";
@@ -9,6 +5,7 @@ import { generateCacheKey } from "#utils/redis.util.js";
 import { generateToken, hashToken } from "#utils/token_generator.util.js";
 
 export class RegisterService {
+  readonly id = Math.random().toString(36).slice(2, 8);
   constructor(private deps: RegisterDeps) {}
 
   private async cacheKey(key: string, val: string, ttl: number): Promise<void> {
@@ -23,11 +20,11 @@ export class RegisterService {
     /** -------- processing :: input data ---------- */
     email = email.toLowerCase();
 
-    const client = await this.deps.db.getClient();
-    const userRepo = this.deps.repos?.userRepo ?? new UserRepo(client);
+    /** debug log */
+    console.log("debug 1");
 
     /** -------- check :: user already exists -------- */
-    const existingUser = await userRepo.findUserByEmail(email);
+    const existingUser = await this.deps.userRepo.findUserByEmail(email);
 
     if (existingUser) {
       throw new AppError(
@@ -56,7 +53,7 @@ export class RegisterService {
     const passwordHash = await hashString(password);
 
     /** -------- save :: user in db -------- */
-    const user = await userRepo.createUser({
+    const user = await this.deps.userRepo.createUser({
       email,
       password: passwordHash,
       name,
@@ -95,12 +92,8 @@ export class RegisterService {
   }
 
   async resendVerification(email: string) {
-    /** -------- initialize :: variables -------- */
-    const client = await this.deps.db.getClient();
-    const userRepo = this.deps.repos?.userRepo ?? new UserRepo(client);
-
     /** -------- get :: user from db -------- */
-    const user = await userRepo.findUserByEmail(email);
+    const user = await this.deps.userRepo.findUserByEmail(email);
 
     /** -------- check :: if user exists -------- */
     if (!user) {

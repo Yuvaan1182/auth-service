@@ -9,6 +9,7 @@ export const registerController = (registerService: RegisterService) => ({
   register: asyncHandler(async (req: Request, res: Response) => {
     const { email, name, password } = req.body;
 
+    console.log("controller register");
     const user = await registerService.register(email, password, name);
 
     return sendResponse(true, res, 201, "AUTH_SUCCESS_001", {

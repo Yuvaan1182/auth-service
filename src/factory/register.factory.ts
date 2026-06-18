@@ -1,23 +1,13 @@
-import { RedisService } from "#redis/redis.service.js";
-import { EmailService } from "#services/email/email.service.js";
 import { RegisterDeps } from "#types/auth.type.js";
-import { PostgreDB } from "#db/postgre.db.js";
 import { RegisterService } from "#services/auth/register.service.js";
+import { appContainer } from "#container/app.container.js";
+import { repoContainer } from "#container/repo.container.js";
 
-export const createRegisterService = (deps?: Partial<RegisterDeps>) => {
-  const db = deps?.db ?? new PostgreDB();
-  const redisService = deps?.redisService ?? new RedisService();
-  const emailService =
-    deps?.emailService ??
-    new EmailService({
-      db,
-      redisService,
-    });
-
+export const createRegisterService = () => {
   return new RegisterService({
-    db,
-    redisService,
-    emailService,
-    repos: deps?.repos,
+    userRepo: repoContainer.userRepo,
+    tokenRepo: repoContainer.tokenRepo,
+    redisService: appContainer.redis,
+    emailService: appContainer.email,
   } as RegisterDeps);
 };
