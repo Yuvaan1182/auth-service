@@ -16,4 +16,17 @@ export class UserRepo {
     const user = await this.db.user.create({ data });
     return user;
   }
+
+  async markUserVerified(userId: string) {
+    const user = await this.db.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        verified: true,
+      },
+    });
+
+    return user;
+  }
 }

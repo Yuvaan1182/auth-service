@@ -16,6 +16,9 @@ export const env = {
   port: Number(parsed.PORT) || 8000,
   client_url: parsed.CLIENT_URL,
 
+  /** --- LOGGER --- */
+  log_level: parsed.LOG_LEVEL,
+
   /** --- JWT --- */
   jwt_access_secret: parsed.JWT_ACCESS_SECRET,
   jwt_refresh_secret: parsed.JWT_REFRESH_SECRET,
@@ -39,5 +42,6 @@ export const env = {
   app_mail_pass: parsed.APP_MAIL_PASS,
   app_mail_host: parsed.APP_MAIL_HOST,
   app_mail_port: Number(parsed.APP_MAIL_PORT) || 465,
-  app_mail_service_provider: parsed.APP_MAIL_SERVICE_PROVIDER,
+  app_mail_secure: parsed.APP_MAIL_SECURE,
+  app_mail_from: parsed.APP_MAIL_FROM,
 };

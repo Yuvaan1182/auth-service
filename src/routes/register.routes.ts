@@ -11,7 +11,6 @@ export const registerRoutes = () => {
 
   const controller = registerController(serviceContainer.registerService);
 
-  router.get("/rtest", (req, res) => res.send("OK"));
   /** --- register user --- */
   router.post("/", validate(registerSchema), controller.register);
 

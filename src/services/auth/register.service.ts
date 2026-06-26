@@ -64,11 +64,16 @@ export class RegisterService {
     void this.cacheKey(key, tokenHash, 300);
 
     /** -------- queue :: verfication email -------- */
+    console.log("AUTH_REGISTER: Queueing verification email");
+
     void this.deps.emailService
       .queueVerificationMail(email, token)
-      .catch((err) =>
-        console.error("AUTH_REGISTER: Error sending verification email:", err),
-      );
+      .then(() => {
+        console.log("AUTH_REGISTER: Email queued successfully");
+      })
+      .catch((err) => {
+        console.error("AUTH_REGISTER: Queue failed", err);
+      });
 
     return user;
   }
@@ -82,10 +87,14 @@ export class RegisterService {
     const cachedTokenHash =
       await this.deps.redisService.getValWithKey(cachedTokenKey);
 
-    /** -------- delete :: token from cache -------- */
-    if (cachedTokenHash) {
+    if (cachedTokenHash && cachedTokenHash === tokenHash) {
+      /** -------- delete :: token from cache -------- */
       await this.deps.redisService.delKey(cachedTokenKey);
-      return cachedTokenHash === tokenHash;
+
+      /** -------- mark user verified in db -------- */
+      const user = await this.deps.userRepo.markUserVerified(userId);
+
+      return user.verified;
     }
 
     return false;
