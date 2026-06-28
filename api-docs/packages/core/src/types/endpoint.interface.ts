@@ -7,8 +7,8 @@ import { Response } from "./response.interface";
 export interface Endpoint {
   id: string;
   method: string;
-  path: string;
   route: string;
+  path: string;
   request: Request;
   response: Response;
   examples: ExampleStore;
