@@ -6,7 +6,7 @@ export const createAuthRoutes = () => {
   const router = Router();
 
   router.use("/register", registerRoutes());
-  router.use("/login", loginRoutes);
+  router.use("/login", loginRoutes());
 
   return router;
 };

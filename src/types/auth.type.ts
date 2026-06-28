@@ -12,10 +12,11 @@ import { verifyEmailSchema } from "#schema/email.schema.js";
 import { UserRepo } from "#repo/user.repo.js";
 import { TokenRepo } from "#repo/token.repo.js";
 import { RedisService } from "#redis/redis.service.js";
+import { SessionRepo } from "#repo/session.repo.js";
 
 export type VerifyEmailInput = z.infer<typeof verifyEmailSchema>;
 
-export interface RegisterDeps {
+export interface RegisterServiceDeps {
   userRepo: UserRepo;
   tokenRepo: TokenRepo;
   redisService: RedisService;
@@ -27,19 +28,13 @@ export type EmailServiceDeps = {
   redisService: RedisServiceInterface;
 };
 
-export type AuthServiceDeps = {
-  registerService: RegisterService;
-};
-
 export type LoginServiceDeps = {
-  db: PostgreDB;
+  userRepo: UserRepo;
   tokenService: TokenService;
-  repos?: Partial<LoginRepos>;
 };
 
 export type TokenServiceDeps = {
-  db: PostgreDB;
-  repos?: Partial<TokenRepos>;
+  sessionRepo: SessionRepo;
 };
 
 export type RefreshServiceDeps = {

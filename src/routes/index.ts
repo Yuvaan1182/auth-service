@@ -6,7 +6,9 @@ export const createRoutes = () => {
   const authRoutes = createAuthRoutes();
 
   const router = Router();
+
   router.use(setRateLimit);
+
   router.use("/auth/v1/", authRoutes);
 
   return router;

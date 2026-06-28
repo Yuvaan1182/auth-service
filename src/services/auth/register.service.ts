@@ -1,12 +1,11 @@
-import { RegisterDeps } from "#types/auth.type.js";
+import { RegisterServiceDeps } from "#types/auth.type.js";
 import { AppError } from "#utils/app_error.util.js";
 import { hashString, isStrongPassword } from "#utils/password.util.js";
 import { generateCacheKey } from "#utils/redis.util.js";
 import { generateToken, hashToken } from "#utils/token_generator.util.js";
 
 export class RegisterService {
-  readonly id = Math.random().toString(36).slice(2, 8);
-  constructor(private deps: RegisterDeps) {}
+  constructor(private deps: RegisterServiceDeps) {}
 
   private async cacheKey(key: string, val: string, ttl: number): Promise<void> {
     try {

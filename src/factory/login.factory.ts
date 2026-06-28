@@ -1,24 +1,11 @@
 import { LoginServiceDeps } from "#types/auth.type.js";
-import { PostgreDB } from "#db/postgre.db.js";
 import { LoginService } from "#services/auth/login.service.js";
-import { TokenService } from "#services/auth/token.service.js";
+import { repoContainer } from "#container/repo.container.js";
+import { serviceContainer } from "#container/service.container.js";
 
 export const createLoginService = (deps?: LoginServiceDeps) => {
-  const db = deps?.db ?? new PostgreDB();
-  const tokenService =
-    deps?.tokenService ??
-    new TokenService({
-      db,
-      repos: {
-        sessionRepo: deps?.repos?.sessionRepo,
-      },
-    });
-
   return new LoginService({
-    db,
-    tokenService,
-    repos: {
-      userRepo: deps?.repos?.userRepo,
-    },
+    userRepo: repoContainer.userRepo,
+    tokenService: serviceContainer.tokenService,
   });
 };

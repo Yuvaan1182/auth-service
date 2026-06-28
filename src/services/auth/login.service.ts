@@ -6,18 +6,16 @@ import { env } from "#config/env.config.js";
 
 // POST   /auth/introspect   (optional, for token validation across services)
 /**
- * @TODO: session device based user login handling
+ * @TODO
+ * 1. session device based user login handling
+ * 2. fix retry login for logged in user
  */
 export class LoginService {
   constructor(private deps: LoginServiceDeps) {}
 
   async login(email: string, password: string) {
-    /** -------- initializing const -------- */
-    const client = await this.deps.db.getClient();
-    const userRepo = this.deps.repos?.userRepo ?? new UserRepo(client);
-
     /** -------- check :: user exists -------- */
-    const user = await userRepo.findUserByEmail(email);
+    const user = await this.deps.userRepo.findUserByEmail(email);
 
     if (!user || !user.password) {
       throw new AppError("Invalid email or password", 401, "AUTH_FAILURE_014");
@@ -29,6 +27,10 @@ export class LoginService {
     if (!validUser) {
       throw new AppError("Invalid email or password", 401, "AUTH_FAILURE_014");
     }
+
+    // if (user.isActive) {
+
+    // }
 
     /** -------- check :: mfa enabled for user -------- */
     const mfaEnabled = user.mfa;

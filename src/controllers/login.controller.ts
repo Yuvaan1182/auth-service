@@ -9,7 +9,7 @@ export const loginController = (loginService: LoginService) => ({
 
     const tokens = await loginService.login(email, password);
 
-    return sendResponse(true, res, 201, "AUTH_SUCCESS_001", {
+    return sendResponse(true, res, 200, "AUTH_SUCCESS_004", {
       message: "User logged in successfully.",
       data: tokens,
     });

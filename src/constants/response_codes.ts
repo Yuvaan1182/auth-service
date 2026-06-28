@@ -1,12 +1,12 @@
 export const responseCodes = {
-  /** --- Success Codes --- */
+  /** --- Register Service Success Codes --- */
   AUTH_SUCCESS_001: "User Registration Success: User registered successfully",
   AUTH_SUCCESS_002:
     "User Email Verified Success: User email verified successfully",
   AUTH_SUCCESS_003:
     "User Resend Email Sent Success: User verification email sent successfully",
 
-  /** --- Failure codes --- */
+  /** --- Register Service Failure codes --- */
   AUTH_FAILURE_001: "User Registration failed: User already exists",
   AUTH_FAILURE_002: "User Registration failed: Email rejected by the server",
   AUTH_FAILURE_003:
