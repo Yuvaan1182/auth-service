@@ -1,4 +1,4 @@
-import type { Endpoint, EndpointRepository, HttpMethod } from "../types";
+import type { Endpoint, EndpointRepository } from "../types";
 import { getEndpointKey } from "../utils/get-endpoints.utils";
 
 export function createInMemoryRepository(): EndpointRepository {

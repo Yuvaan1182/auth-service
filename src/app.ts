@@ -10,6 +10,10 @@ export const createApp = () => {
   const routes = createRoutes();
   const app = express();
 
+  /** api-docs start */
+
+  /** api-docs end */
+
   app.use(cors());
   app.use(express.json());
   app.use(addTraceId);
