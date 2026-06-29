@@ -11,3 +11,4 @@ export * from "./request.interface";
 export * from "./response-time-stats.interface";
 export * from "./response.interface";
 export * from "./endpoint-repo.interface";
+export * from "./http-method.types";

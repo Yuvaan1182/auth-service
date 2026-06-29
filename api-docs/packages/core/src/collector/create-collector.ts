@@ -1,6 +1,11 @@
 import type { EventBus } from "../events";
-import type { ApiDocsEvents, Observation, Request, Response } from "../types";
-import { HttpMethod } from "../types/http-method.types";
+import type {
+  ApiDocsEvents,
+  HttpMethod,
+  Observation,
+  Request,
+  Response,
+} from "../types";
 
 interface CollectInput {
   method: HttpMethod;
@@ -12,22 +17,24 @@ interface CollectInput {
 }
 
 export interface Collector {
-  collect(input: CollectInput): void;
+  collect(input: CollectInput): Promise<void>;
 }
 
 export function createCollector(eventBus: EventBus<ApiDocsEvents>): Collector {
-  function collect(input: CollectInput): void {
+  async function collect(input: CollectInput): Promise<void> {
     const observation: Observation = {
-      request: input.request,
-      response: input.response,
       method: input.method,
       route: input.route,
       path: input.path,
+
+      request: input.request,
+      response: input.response,
+
       duration: input.duration,
       timestamp: new Date().toISOString(),
     };
 
-    eventBus.emit("observationCaptured", observation);
+    await eventBus.emit("observationCaptured", observation);
   }
 
   return {

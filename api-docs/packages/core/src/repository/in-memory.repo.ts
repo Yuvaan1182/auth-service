@@ -1,25 +1,16 @@
-import type { Endpoint, EndpointRepository } from "../types";
+import type { Endpoint, EndpointRepository, HttpMethod } from "../types";
+import { getEndpointKey } from "../utils/get-endpoints.utils";
 
 export function createInMemoryRepository(): EndpointRepository {
   const store = new Map<string, Endpoint>();
 
-  function getKey(endpoint: Endpoint) {
-    return `${endpoint.method}:${endpoint.route}`;
-  }
-
   return {
-    async findByRoute(route) {
-      for (const endpoint of store.values()) {
-        if (endpoint.route === route) {
-          return endpoint;
-        }
-      }
-
-      return null;
+    async findByRoute(method, route) {
+      return store.get(getEndpointKey(method, route)) ?? null;
     },
 
     async save(endpoint) {
-      store.set(getKey(endpoint), endpoint);
+      store.set(getEndpointKey(endpoint.method, endpoint.route), endpoint);
     },
 
     async findAll() {
