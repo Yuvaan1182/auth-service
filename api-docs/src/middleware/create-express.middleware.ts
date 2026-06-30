@@ -1,3 +1,4 @@
+import { captureResponse } from "./capture-response.middleware";
 import type { NextFunction, Request, Response, RequestHandler } from "express";
 
 import type { Collector } from "../collector";
@@ -7,6 +8,8 @@ import { toHttpMethod } from "../utils/http-method.utils";
 export function createExpressMiddleware(collector: Collector): RequestHandler {
   return (req: Request, res: Response, next: NextFunction) => {
     const startedAt = Date.now();
+
+    const responseCapture = captureResponse(res);
 
     res.on("finish", async () => {
       const duration = Date.now() - startedAt;
@@ -28,7 +31,7 @@ export function createExpressMiddleware(collector: Collector): RequestHandler {
         response: {
           status: res.statusCode,
           headers: normalizeHeaders(res.getHeaders()),
-          body: undefined,
+          body: responseCapture.getBody(),
         },
 
         duration,

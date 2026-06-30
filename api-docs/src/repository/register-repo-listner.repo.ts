@@ -7,14 +7,10 @@ export function registerRepositoryListeners(
   repository: EndpointRepository,
 ): void {
   eventBus.on("observationCaptured", async (observation) => {
-    console.log("Before:", await repository.findAll());
-
     const endpoint = await repository.findByRoute(
       observation.method,
       observation.route,
     );
-
-    console.log(endpoint);
 
     const mergedEndpoint = mergeObservation(endpoint, observation);
 
