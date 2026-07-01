@@ -1,0 +1,36 @@
+[
+  {
+    "id": "GET:/hello",
+    "method": "GET",
+    "route": "/hello",
+    "path": "/hello",
+    "request": {
+      "headers": {},
+      "params": {},
+      "query": {}
+    },
+    "response": {
+      "status": 200,
+      "headers": {},
+      "body": {
+        "message": "Hello"
+      }
+    },
+    "metadata": {},
+    "examples": {
+      "errors": {
+        "examples": {}
+      }
+    },
+    "stats": {
+      "hits": 1,
+      "firstSeen": "2026-07-01T19:08:07.787Z",
+      "lastSeen": "2026-07-01T19:08:07.788Z",
+      "responseTime": {
+        "average": 5,
+        "minimum": 5,
+        "maximum": 5
+      }
+    }
+  }
+]

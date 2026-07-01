@@ -9,6 +9,9 @@
   "scripts": {
     "dev": "tsx watch src/playground.ts",
     "playground": "tsx src/playground.ts",
+    "playground:express": "tsx src/playground-express.ts",
+    "playground:file": "tsx src/playground-file-storage.ts",
+    "playground:json": "tsx src/playground-json.ts",
     "build": "tsc",
     "test": "vitest"
   },

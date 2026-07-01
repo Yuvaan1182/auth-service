@@ -1,93 +1,61 @@
-import { createCollector } from "./collector";
-import { createEventBus } from "./events";
-import {
-  createInMemoryRepository,
-  registerRepositoryListeners,
-} from "./repository";
-
-import type { ApiDocsEvents, Response } from "./types";
+import { readFile } from "node:fs/promises";
+import { createJsonRepository } from "./repository";
 
 async function main() {
-  const eventBus = createEventBus<ApiDocsEvents>();
+  const repository = createJsonRepository({
+    filePath: "./output/endpoints.json",
+  });
 
-  const repository = createInMemoryRepository();
+  await repository.clear();
 
-  registerRepositoryListeners(eventBus, repository);
+  await repository.save({
+    id: "GET:/hello",
+    method: "GET",
+    route: "/hello",
+    path: "/hello",
 
-  const collector = createCollector(eventBus);
+    request: {
+      headers: {},
+      params: {},
+      query: {},
+      body: undefined,
+    },
 
-  async function collect(duration: number, response: Response) {
-    await collector.collect({
-      method: "POST",
-
-      route: "/api/v1/auth/register",
-
-      path: "/api/v1/auth/register",
-
-      request: {
-        headers: {},
-        query: {},
-        params: {},
-        body: {
-          email: "john@example.com",
-        },
+    response: {
+      status: 200,
+      headers: {},
+      body: {
+        message: "Hello",
       },
+    },
 
-      response,
+    metadata: {},
 
-      duration,
-    });
-  }
+    examples: {
+      latest: undefined,
+      success: undefined,
+      errors: {
+        examples: {},
+      },
+    },
 
-  // Successful requests
-
-  await collect(205, {
-    status: 201,
-    headers: {},
-    body: {
-      success: true,
+    stats: {
+      hits: 1,
+      firstSeen: new Date().toISOString(),
+      lastSeen: new Date().toISOString(),
+      responseTime: {
+        average: 5,
+        minimum: 5,
+        maximum: 5,
+      },
     },
   });
-
-  await collect(350, {
-    status: 201,
-    headers: {},
-    body: {
-      success: true,
-    },
-  });
-
-  await collect(100, {
-    status: 201,
-    headers: {},
-    body: {
-      success: true,
-    },
-  });
-
-  await collect(350, {
-    status: 201,
-    headers: {},
-    body: {
-      success: true,
-    },
-  });
-
-  // Uncomment to test error handling
-
-  /*
-  await collect(180, {
-    status: 400,
-    headers: {},
-    body: {
-      message: "Invalid email",
-    },
-  });
-  */
 
   console.dir(await repository.findAll(), {
     depth: null,
   });
+
+  console.log("Raw file:\n", await readFile("./output/endpoints.json", "utf8"));
 }
 
 main().catch(console.error);
