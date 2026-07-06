@@ -71,3 +71,20 @@ export interface OpenApiParameter {
 
   example?: unknown;
 }
+
+export interface GenerateOpenApiResult {
+  document: OpenApiDocument;
+  files: string[];
+}
+
+export interface GenerateOpenApiOptions {
+  output?: string;
+
+  title: string;
+
+  version: string;
+
+  writeJson?: boolean;
+
+  writeYaml?: boolean;
+}

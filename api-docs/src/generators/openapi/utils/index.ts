@@ -1,2 +1,2 @@
-export * from "./to-openapi-path.utils";
+export * from "./to-openapi-path";
 export * from "./http-status";

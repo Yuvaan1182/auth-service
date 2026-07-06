@@ -1,14 +1,8 @@
 import { createOpenApiGenerator } from "../generators";
+import { GenerateOpenApiOptions } from "../generators/openapi/openapi.types";
 import { createJsonRepository } from "../repository";
-import { getEndpointsFilePath } from "../utils";
-
-export interface GenerateOpenApiOptions {
-  output?: string;
-
-  title: string;
-
-  version: string;
-}
+import { getEndpointsFilePath, getOpenApiJsonFilePath } from "../utils";
+import { writeJson } from "../writers";
 
 export async function generateOpenApi(options: GenerateOpenApiOptions) {
   const repository = createJsonRepository({
@@ -20,5 +14,24 @@ export async function generateOpenApi(options: GenerateOpenApiOptions) {
     version: options.version,
   });
 
-  return generator.generate(repository);
+  const document = await generator.generate(repository);
+
+  if (options.writeJson) {
+    await writeJson(getOpenApiJsonFilePath(options.output), document);
+  }
+
+  const files: string[] = [];
+
+  if (options.writeJson) {
+    const filePath = getOpenApiJsonFilePath(options.output);
+
+    await writeJson(filePath, document);
+
+    files.push(filePath);
+  }
+
+  return {
+    document,
+    files,
+  };
 }

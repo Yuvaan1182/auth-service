@@ -245,7 +245,7 @@
         "user-agent": "PostmanRuntime/7.54.0",
         "accept": "*/*",
         "cache-control": "no-cache",
-        "postman-token": "d4bdf271-7760-4b69-8b1d-69e3a84a72bf",
+        "postman-token": "246b9a4d-8ec7-4173-8bd1-d704cb2255b2",
         "host": "localhost:3000",
         "accept-encoding": "gzip, deflate, br",
         "connection": "keep-alive"
@@ -273,13 +273,13 @@
     "metadata": {},
     "examples": {
       "latest": {
-        "capturedAt": "2026-07-06T07:10:47.531Z",
+        "capturedAt": "2026-07-06T07:35:30.565Z",
         "request": {
           "headers": {
             "user-agent": "PostmanRuntime/7.54.0",
             "accept": "*/*",
             "cache-control": "no-cache",
-            "postman-token": "d4bdf271-7760-4b69-8b1d-69e3a84a72bf",
+            "postman-token": "246b9a4d-8ec7-4173-8bd1-d704cb2255b2",
             "host": "localhost:3000",
             "accept-encoding": "gzip, deflate, br",
             "connection": "keep-alive"
@@ -306,13 +306,13 @@
         }
       },
       "success": {
-        "capturedAt": "2026-07-06T07:10:47.531Z",
+        "capturedAt": "2026-07-06T07:35:30.565Z",
         "request": {
           "headers": {
             "user-agent": "PostmanRuntime/7.54.0",
             "accept": "*/*",
             "cache-control": "no-cache",
-            "postman-token": "d4bdf271-7760-4b69-8b1d-69e3a84a72bf",
+            "postman-token": "246b9a4d-8ec7-4173-8bd1-d704cb2255b2",
             "host": "localhost:3000",
             "accept-encoding": "gzip, deflate, br",
             "connection": "keep-alive"
@@ -343,13 +343,13 @@
       }
     },
     "stats": {
-      "hits": 5,
+      "hits": 7,
       "firstSeen": "2026-07-06T07:10:44.641Z",
-      "lastSeen": "2026-07-06T07:10:47.531Z",
+      "lastSeen": "2026-07-06T07:35:30.565Z",
       "responseTime": {
-        "average": 2.2,
+        "average": 3.2857142857142856,
         "minimum": 1,
-        "maximum": 3
+        "maximum": 9
       }
     }
   }

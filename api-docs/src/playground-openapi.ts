@@ -1,22 +1,20 @@
-import { createOpenApiGenerator } from "./generators";
-import { createJsonRepository } from "./repository";
-import { getEndpointsFilePath } from "./utils";
+import { generateOpenApi } from "./services";
 
 async function main() {
-  const repository = createJsonRepository({
-    filePath: getEndpointsFilePath(),
-  });
-
-  const generator = createOpenApiGenerator({
+  const result = await generateOpenApi({
+    output: "./scribe-docs",
     title: "Auth API",
     version: "1.0.0",
+    writeJson: true,
   });
 
-  const document = await generator.generate(repository);
-
-  console.dir(document, {
+  console.dir(result.document, {
     depth: null,
   });
+
+  console.log("Generated files:");
+
+  console.dir(result.files);
 }
 
 main().catch(console.error);
