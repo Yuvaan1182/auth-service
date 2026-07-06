@@ -1,3 +1,4 @@
+import { resolveRoute } from "../utils";
 import { captureResponse } from "./capture-response.middleware";
 import type { NextFunction, Request, Response, RequestHandler } from "express";
 
@@ -12,12 +13,22 @@ export function createExpressMiddleware(collector: Collector): RequestHandler {
     const responseCapture = captureResponse(res);
 
     res.on("finish", async () => {
+      /** ignore invalid 404 request to be stored */
+      if (!req.route) {
+        return;
+      }
+
       const duration = Date.now() - startedAt;
+      const route = resolveRoute(req);
+
+      if (!route) {
+        return;
+      }
 
       await collector.collect({
         method: toHttpMethod(req.method),
 
-        route: req.baseUrl + (req.route?.path ?? req.path),
+        route: route,
 
         path: req.originalUrl,
 

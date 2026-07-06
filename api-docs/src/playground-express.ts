@@ -5,6 +5,7 @@ import { createEventBus } from "./events";
 import { createExpressMiddleware } from "./middleware";
 import {
   createInMemoryRepository,
+  createJsonRepository,
   registerRepositoryListeners,
 } from "./repository";
 
@@ -17,11 +18,18 @@ async function main() {
 
   const eventBus = createEventBus<ApiDocsEvents>();
 
-  const repository = createInMemoryRepository();
+  const repository = createJsonRepository({
+    filePath: "./output/endpoints.json",
+  });
 
   registerRepositoryListeners(eventBus, repository);
 
   const collector = createCollector(eventBus);
+
+  app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+  });
 
   app.use(createExpressMiddleware(collector));
 
@@ -35,6 +43,13 @@ async function main() {
     res.status(201).json({
       token: "abc123",
       user: req.body,
+    });
+  });
+
+  app.get("/users/:id", (req, res) => {
+    res.json({
+      id: req.params.id,
+      active: req.query.active,
     });
   });
 

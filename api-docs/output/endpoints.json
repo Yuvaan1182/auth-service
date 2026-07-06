@@ -1,35 +1,355 @@
 [
   {
+    "id": "POST:/login",
+    "method": "POST",
+    "route": "/login",
+    "path": "/login",
+    "request": {
+      "headers": {
+        "content-type": "application/json",
+        "user-agent": "PostmanRuntime/7.54.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "dd6864d5-5ffe-4f0c-9509-6ec5dc65d7fc",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive",
+        "content-length": "61"
+      },
+      "params": {},
+      "query": {},
+      "body": {
+        "email": "john@example.com",
+        "password": "secret"
+      }
+    },
+    "response": {
+      "status": 201,
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "74",
+        "etag": "W/\"4a-4I6PIZLsN+dLV5m3f4/hJPlneF0\""
+      },
+      "body": {
+        "token": "abc123",
+        "user": {
+          "email": "john@example.com",
+          "password": "secret"
+        }
+      }
+    },
+    "metadata": {},
+    "examples": {
+      "latest": {
+        "capturedAt": "2026-07-05T11:51:44.946Z",
+        "request": {
+          "headers": {
+            "content-type": "application/json",
+            "user-agent": "PostmanRuntime/7.54.0",
+            "accept": "*/*",
+            "cache-control": "no-cache",
+            "postman-token": "dd6864d5-5ffe-4f0c-9509-6ec5dc65d7fc",
+            "host": "localhost:3000",
+            "accept-encoding": "gzip, deflate, br",
+            "connection": "keep-alive",
+            "content-length": "61"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "email": "john@example.com",
+            "password": "secret"
+          }
+        },
+        "response": {
+          "status": 201,
+          "headers": {
+            "x-powered-by": "Express",
+            "content-type": "application/json; charset=utf-8",
+            "content-length": "74",
+            "etag": "W/\"4a-4I6PIZLsN+dLV5m3f4/hJPlneF0\""
+          },
+          "body": {
+            "token": "abc123",
+            "user": {
+              "email": "john@example.com",
+              "password": "secret"
+            }
+          }
+        }
+      },
+      "success": {
+        "capturedAt": "2026-07-05T11:51:44.946Z",
+        "request": {
+          "headers": {
+            "content-type": "application/json",
+            "user-agent": "PostmanRuntime/7.54.0",
+            "accept": "*/*",
+            "cache-control": "no-cache",
+            "postman-token": "dd6864d5-5ffe-4f0c-9509-6ec5dc65d7fc",
+            "host": "localhost:3000",
+            "accept-encoding": "gzip, deflate, br",
+            "connection": "keep-alive",
+            "content-length": "61"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "email": "john@example.com",
+            "password": "secret"
+          }
+        },
+        "response": {
+          "status": 201,
+          "headers": {
+            "x-powered-by": "Express",
+            "content-type": "application/json; charset=utf-8",
+            "content-length": "74",
+            "etag": "W/\"4a-4I6PIZLsN+dLV5m3f4/hJPlneF0\""
+          },
+          "body": {
+            "token": "abc123",
+            "user": {
+              "email": "john@example.com",
+              "password": "secret"
+            }
+          }
+        }
+      },
+      "errors": {
+        "examples": {}
+      }
+    },
+    "stats": {
+      "hits": 3,
+      "firstSeen": "2026-07-05T11:51:43.512Z",
+      "lastSeen": "2026-07-05T11:51:44.946Z",
+      "responseTime": {
+        "average": 2.6666666666666665,
+        "minimum": 2,
+        "maximum": 4
+      }
+    }
+  },
+  {
     "id": "GET:/hello",
     "method": "GET",
     "route": "/hello",
     "path": "/hello",
     "request": {
-      "headers": {},
+      "headers": {
+        "user-agent": "PostmanRuntime/7.54.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "8776fb2d-5fcc-421e-8535-747801244ebd",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive"
+      },
       "params": {},
       "query": {}
     },
     "response": {
       "status": 200,
-      "headers": {},
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "32",
+        "etag": "W/\"20-5uF4STlYrN+WQrLXp4idA8KNXrY\""
+      },
       "body": {
-        "message": "Hello"
+        "message": "Hello RouteScribe!"
       }
     },
     "metadata": {},
     "examples": {
+      "latest": {
+        "capturedAt": "2026-07-05T11:51:51.065Z",
+        "request": {
+          "headers": {
+            "user-agent": "PostmanRuntime/7.54.0",
+            "accept": "*/*",
+            "cache-control": "no-cache",
+            "postman-token": "8776fb2d-5fcc-421e-8535-747801244ebd",
+            "host": "localhost:3000",
+            "accept-encoding": "gzip, deflate, br",
+            "connection": "keep-alive"
+          },
+          "params": {},
+          "query": {}
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "x-powered-by": "Express",
+            "content-type": "application/json; charset=utf-8",
+            "content-length": "32",
+            "etag": "W/\"20-5uF4STlYrN+WQrLXp4idA8KNXrY\""
+          },
+          "body": {
+            "message": "Hello RouteScribe!"
+          }
+        }
+      },
+      "success": {
+        "capturedAt": "2026-07-05T11:51:51.065Z",
+        "request": {
+          "headers": {
+            "user-agent": "PostmanRuntime/7.54.0",
+            "accept": "*/*",
+            "cache-control": "no-cache",
+            "postman-token": "8776fb2d-5fcc-421e-8535-747801244ebd",
+            "host": "localhost:3000",
+            "accept-encoding": "gzip, deflate, br",
+            "connection": "keep-alive"
+          },
+          "params": {},
+          "query": {}
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "x-powered-by": "Express",
+            "content-type": "application/json; charset=utf-8",
+            "content-length": "32",
+            "etag": "W/\"20-5uF4STlYrN+WQrLXp4idA8KNXrY\""
+          },
+          "body": {
+            "message": "Hello RouteScribe!"
+          }
+        }
+      },
+      "errors": {
+        "examples": {}
+      }
+    },
+    "stats": {
+      "hits": 5,
+      "firstSeen": "2026-07-05T11:51:47.729Z",
+      "lastSeen": "2026-07-05T11:51:51.065Z",
+      "responseTime": {
+        "average": 1.8,
+        "minimum": 1,
+        "maximum": 4
+      }
+    }
+  },
+  {
+    "id": "GET:/users/:id",
+    "method": "GET",
+    "route": "/users/:id",
+    "path": "/users/42?active=true",
+    "request": {
+      "headers": {
+        "user-agent": "PostmanRuntime/7.54.0",
+        "accept": "*/*",
+        "cache-control": "no-cache",
+        "postman-token": "52c3d806-e28f-4c9f-99a5-00d477921ea8",
+        "host": "localhost:3000",
+        "accept-encoding": "gzip, deflate, br",
+        "connection": "keep-alive"
+      },
+      "params": {
+        "id": "42"
+      },
+      "query": {
+        "active": "true"
+      }
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "x-powered-by": "Express",
+        "content-type": "application/json; charset=utf-8",
+        "content-length": "27",
+        "etag": "W/\"1b-FvPweWXP45ua5a/WpMTZd9OxEsI\""
+      },
+      "body": {
+        "id": "42",
+        "active": "true"
+      }
+    },
+    "metadata": {},
+    "examples": {
+      "latest": {
+        "capturedAt": "2026-07-05T12:22:02.609Z",
+        "request": {
+          "headers": {
+            "user-agent": "PostmanRuntime/7.54.0",
+            "accept": "*/*",
+            "cache-control": "no-cache",
+            "postman-token": "52c3d806-e28f-4c9f-99a5-00d477921ea8",
+            "host": "localhost:3000",
+            "accept-encoding": "gzip, deflate, br",
+            "connection": "keep-alive"
+          },
+          "params": {
+            "id": "42"
+          },
+          "query": {
+            "active": "true"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "x-powered-by": "Express",
+            "content-type": "application/json; charset=utf-8",
+            "content-length": "27",
+            "etag": "W/\"1b-FvPweWXP45ua5a/WpMTZd9OxEsI\""
+          },
+          "body": {
+            "id": "42",
+            "active": "true"
+          }
+        }
+      },
+      "success": {
+        "capturedAt": "2026-07-05T12:22:02.609Z",
+        "request": {
+          "headers": {
+            "user-agent": "PostmanRuntime/7.54.0",
+            "accept": "*/*",
+            "cache-control": "no-cache",
+            "postman-token": "52c3d806-e28f-4c9f-99a5-00d477921ea8",
+            "host": "localhost:3000",
+            "accept-encoding": "gzip, deflate, br",
+            "connection": "keep-alive"
+          },
+          "params": {
+            "id": "42"
+          },
+          "query": {
+            "active": "true"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "x-powered-by": "Express",
+            "content-type": "application/json; charset=utf-8",
+            "content-length": "27",
+            "etag": "W/\"1b-FvPweWXP45ua5a/WpMTZd9OxEsI\""
+          },
+          "body": {
+            "id": "42",
+            "active": "true"
+          }
+        }
+      },
       "errors": {
         "examples": {}
       }
     },
     "stats": {
       "hits": 1,
-      "firstSeen": "2026-07-01T19:08:07.787Z",
-      "lastSeen": "2026-07-01T19:08:07.788Z",
+      "firstSeen": "2026-07-05T12:22:02.609Z",
+      "lastSeen": "2026-07-05T12:22:02.609Z",
       "responseTime": {
-        "average": 5,
-        "minimum": 5,
-        "maximum": 5
+        "average": 6,
+        "minimum": 6,
+        "maximum": 6
       }
     }
   }

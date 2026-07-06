@@ -12,6 +12,9 @@
     "playground:express": "tsx src/playground-express.ts",
     "playground:file": "tsx src/playground-file-storage.ts",
     "playground:json": "tsx src/playground-json.ts",
+    "playground:openapi": "tsx src/playground-openapi.ts",
+    "playground:builders": "tsx src/playground-builders.ts",
+    "playground:schema": "tsx src/playground-schema.ts",
     "build": "tsc",
     "test": "vitest"
   },
