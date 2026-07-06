@@ -1,9 +1,10 @@
 import { createOpenApiGenerator } from "./generators";
 import { createJsonRepository } from "./repository";
+import { getEndpointsFilePath } from "./utils";
 
 async function main() {
   const repository = createJsonRepository({
-    filePath: "./output/endpoints.json",
+    filePath: getEndpointsFilePath(),
   });
 
   const generator = createOpenApiGenerator({

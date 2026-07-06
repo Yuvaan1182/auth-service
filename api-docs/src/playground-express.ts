@@ -1,37 +1,23 @@
 import express from "express";
-
-import { createCollector } from "./collector";
-import { createEventBus } from "./events";
-import { createExpressMiddleware } from "./middleware";
-import {
-  createInMemoryRepository,
-  createJsonRepository,
-  registerRepositoryListeners,
-} from "./repository";
-
-import type { ApiDocsEvents } from "./types";
+import { createRouteScribe } from "./route-scribe";
+import { DEFAULT_OUTPUT_DIRECTORY } from "./constants/constants";
 
 async function main() {
   const app = express();
 
   app.use(express.json());
 
-  const eventBus = createEventBus<ApiDocsEvents>();
-
-  const repository = createJsonRepository({
-    filePath: "./output/endpoints.json",
+  const routeScribe = createRouteScribe({
+    output: DEFAULT_OUTPUT_DIRECTORY,
+    ignore: ["/debug", "/health", "/metrics"],
   });
 
-  registerRepositoryListeners(eventBus, repository);
-
-  const collector = createCollector(eventBus);
+  app.use(routeScribe.middleware());
 
   app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
     next();
   });
-
-  app.use(createExpressMiddleware(collector));
 
   app.get("/hello", (req, res) => {
     res.json({
@@ -54,7 +40,7 @@ async function main() {
   });
 
   app.get("/debug", async (req, res) => {
-    res.json(await repository.findAll());
+    res.json(await routeScribe.getEndpoints());
   });
 
   app.listen(3000, () => {

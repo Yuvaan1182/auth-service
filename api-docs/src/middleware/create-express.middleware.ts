@@ -1,15 +1,21 @@
-import { resolveRoute } from "../utils";
+import { normalizeRequestHeaders, resolveRoute } from "../utils";
 import { captureResponse } from "./capture-response.middleware";
 import type { NextFunction, Request, Response, RequestHandler } from "express";
 
 import type { Collector } from "../collector";
-import { normalizeHeaders } from "../utils/normalize-headers.utils";
+import { normalizeResponseHeaders } from "../utils/normalize-res-headers.utils";
 import { toHttpMethod } from "../utils/http-method.utils";
 
-export function createExpressMiddleware(collector: Collector): RequestHandler {
+export interface ExpressMiddlewareOptions {
+  shouldCollect?(route: string): boolean;
+}
+
+export function createExpressMiddleware(
+  collector: Collector,
+  options: ExpressMiddlewareOptions = {},
+): RequestHandler {
   return (req: Request, res: Response, next: NextFunction) => {
     const startedAt = Date.now();
-
     const responseCapture = captureResponse(res);
 
     res.on("finish", async () => {
@@ -25,6 +31,10 @@ export function createExpressMiddleware(collector: Collector): RequestHandler {
         return;
       }
 
+      if (options.shouldCollect && !options.shouldCollect(route)) {
+        return;
+      }
+
       await collector.collect({
         method: toHttpMethod(req.method),
 
@@ -33,7 +43,7 @@ export function createExpressMiddleware(collector: Collector): RequestHandler {
         path: req.originalUrl,
 
         request: {
-          headers: req.headers,
+          headers: normalizeRequestHeaders(req.headers),
           params: req.params,
           query: req.query,
           body: req.body,
@@ -41,7 +51,7 @@ export function createExpressMiddleware(collector: Collector): RequestHandler {
 
         response: {
           status: res.statusCode,
-          headers: normalizeHeaders(res.getHeaders()),
+          headers: normalizeResponseHeaders(res.getHeaders()),
           body: responseCapture.getBody(),
         },
 

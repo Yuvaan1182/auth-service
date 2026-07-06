@@ -1,6 +1,6 @@
 import { OutgoingHttpHeaders } from "http";
 
-export function normalizeHeaders(
+export function normalizeResponseHeaders(
   headers: OutgoingHttpHeaders,
 ): Record<string, string> {
   const normalized: Record<string, string> = {};

@@ -3,6 +3,7 @@ import type { Endpoint } from "../../../types";
 import type { OpenApiPathItem } from "../openapi.types";
 
 import { buildOperation } from "./build-operation";
+import { normalizeOpenApiPath } from "../utils";
 
 export function buildPaths(
   endpoints: Endpoint[],
@@ -12,9 +13,11 @@ export function buildPaths(
   for (const endpoint of endpoints) {
     const method = endpoint.method.toLowerCase() as keyof OpenApiPathItem;
 
-    paths[endpoint.route] ??= {};
+    const openApiPath = normalizeOpenApiPath(endpoint.route);
 
-    paths[endpoint.route][method] = buildOperation(endpoint);
+    paths[openApiPath] ??= {};
+
+    paths[openApiPath][method] = buildOperation(endpoint);
   }
 
   return paths;
