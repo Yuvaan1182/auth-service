@@ -19,9 +19,6 @@ export class RegisterService {
     /** -------- processing :: input data ---------- */
     email = email.toLowerCase();
 
-    /** debug log */
-    console.log("debug 1");
-
     /** -------- check :: user already exists -------- */
     const existingUser = await this.deps.userRepo.findUserByEmail(email);
 
