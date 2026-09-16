@@ -38,9 +38,8 @@ export type TokenServiceDeps = {
 };
 
 export type RefreshServiceDeps = {
-  db: PostgreDB;
   tokenService: TokenService;
-  repos?: Partial<TokenRepos>;
+  sessionRepo?: SessionRepo;
 };
 
 export type LogoutServiceDeps = {

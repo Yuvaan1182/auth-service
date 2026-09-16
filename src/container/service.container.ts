@@ -1,4 +1,5 @@
 import { LoginService } from "#services/auth/login.service.js";
+import { RefreshService } from "#services/auth/refresh.service.js";
 import { RegisterService } from "#services/auth/register.service.js";
 import { TokenService } from "#services/auth/token.service.js";
 import { appContainer } from "./app.container.js";
@@ -8,6 +9,7 @@ export class ServiceContainer {
   private _registerService?: RegisterService;
   private _loginService?: LoginService;
   private _tokenService?: TokenService;
+  private _refreshService?: RefreshService;
 
   async init() {
     console.log("ServiceContainer.init: initializing services...");
@@ -28,9 +30,15 @@ export class ServiceContainer {
       tokenService: tokenService,
     });
 
+    const refreshService = new RefreshService({
+      tokenService: tokenService,
+      sessionRepo: repoContainer.sessionRepo,
+    });
+
     this._loginService = loginService;
     this._registerService = registerService;
     this._tokenService = tokenService;
+    this._refreshService = refreshService;
 
     console.log("ServiceContainer.init: services initialized");
   }
@@ -52,6 +60,10 @@ export class ServiceContainer {
 
   get tokenService() {
     return this.require(this._tokenService);
+  }
+
+  get refreshService() {
+    return this.require(this._refreshService);
   }
 }
 

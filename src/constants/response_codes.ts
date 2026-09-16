@@ -6,13 +6,15 @@ export const responseCodes = {
   AUTH_SUCCESS_003:
     "User Resend Email Sent Success: User verification email sent successfully",
 
+  /** --- Refresh token Service Codes --- */
+  AUTH_SUCCESS_005: "Token Rotation Success: Tokens rotated successfully",
+
   /** --- Register Service Failure codes --- */
   AUTH_FAILURE_001: "User Registration failed: User already exists",
   AUTH_FAILURE_002: "User Registration failed: Email rejected by the server",
   AUTH_FAILURE_003:
     "User Registration failed: Zod Validation Error. Invalid Input.",
-  AUTH_FAILURE_004:
-    "User Registration failed: Something went wrong, Please try again later.",
+  AUTH_FAILURE_004: "App Error: Internal Error",
   AUTH_FAILURE_005:
     "User Registration failed: Weak Password strength. Try with a strong password",
 

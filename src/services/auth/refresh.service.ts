@@ -21,12 +21,10 @@ export class RefreshService {
     /** -------- retrieve sessionId and userId from refresh token -------- */
     const payload = jwt.verify(token, env.jwt_refresh_secret) as RefreshToken;
 
-    /** -------- initialize db client -------- */
-    const client = await this.deps.db.getClient();
-    const sessionRepo = this.deps.repos?.sessionRepo ?? new SessionRepo(client);
-
     /** -------- check if the session exists or revoked -------- */
-    const session = await sessionRepo.findSession({ sessionId: payload.sid });
+    const session = await this.deps.sessionRepo?.findSession({
+      sessionId: payload.sid,
+    });
 
     if (!session || session.revoked) {
       throw new AppError(
@@ -42,7 +40,7 @@ export class RefreshService {
 
     if (!verifiedToken) {
       /** -------- revoke session -------- */
-      await sessionRepo.revokeSession({ sessionId: payload.sid });
+      await this.deps.sessionRepo?.revokeSession({ sessionId: payload.sid });
 
       throw new AppError(
         "Unauthorized access warning. Please login again.",
@@ -58,7 +56,7 @@ export class RefreshService {
     );
     const tokenHash = await hashString(refreshToken);
 
-    const updatedSession = await sessionRepo.rotateSession({
+    const updatedSession = await this.deps.sessionRepo?.rotateSession({
       sessionId: payload.sid,
       tokenHash,
     });
